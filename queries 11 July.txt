@@ -1,0 +1,32 @@
+ESERCIZIO GROUP BY
+
+Contare quanti iscritti ci sono stati ogni anno
+
+SELECT YEAR(`students`.`enrolment_date`) AS 'Year',  COUNT(YEAR(`students`.`enrolment_date`)) AS 'Total Enrollments'
+FROM `students`
+GROUP BY YEAR(`students`.`enrolment_date`);
+
+
+Contare gli insegnanti che hanno l'ufficio nello stesso edificio
+
+SELECT `teachers`.`office_address` AS 'Office Address', COUNT(`teachers`.`office_address`) AS 'Amount of Teachers for Address'
+FROM `teachers`
+GROUP BY `teachers`.`office_address`;
+
+
+Calcolare la media dei voti di ogni appello d'esame
+  
+SELECT `exam_student`.`exam_id` AS 'Exam ID', AVG(`exam_student`.`vote`) AS 'Average'
+FROM `exam_student`
+GROUP BY `exam_student`.`exam_id`
+ORDER BY AVG(`exam_student`.`vote`) ASC;
+
+
+Contare quanti corsi di laurea ci sono per ogni dipartimento
+
+SELECT  `departments`.`name` AS 'Department Name', COUNT(`degrees`.`id`) AS 'Degrees'
+FROM `degrees`
+JOIN `departments`
+ON `departments`.`id` = `degrees`.`department_id`
+GROUP BY `departments`.`name`
+ORDER BY COUNT(`degrees`.`id`) DESC;
